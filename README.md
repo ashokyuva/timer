@@ -1,0 +1,2 @@
+# timer
+Automation timer application
