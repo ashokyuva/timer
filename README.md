@@ -146,3 +146,127 @@ features
 	-> env.rb
 Gemfile
 ```
+### Step4 - Create Shared Driver
+Create env.rb inside Support folder with the following code.
+```ruby
+require 'rubygems'
+require 'rspec'
+require 'watir-webdriver'
+ 
+#Creating Remote WebDriver
+browser = Watir::Browser.new(:remote, :url =&gt; "http://SauceUsername:SauceKey@ondemand.saucelabs.com:80/wd/hub",
+                              :desired_capabilities =&gt; WebDriver::Remote::Capabilities.firefox)
+#If you want to run it locally, use Watir::Browser.new :firefox
+                               
+Before do
+  @browser = browser
+end
+```
+### Step5 - Create Feature file
+Create timer.feature file inside feature folder with the below steps
+```ruby
+# Feature Responsible: <AAA@abc.com>
+# Author <XXXX@abc.com>
+# Updated by <YYY@abc.com>
+# Reviewed by <ZZZ@abc.com>
+# Status <Completed>
+# <NotStarted, InProgress, InReview, Completed>
+
+# Automation Info
+# Owner <ASHOK@abc.com>,<23-11-2021>
+# Code Reviewed by <XXX@abc.com>,<24-11-2021>
+# Functionality Reviewed by <YYY@abc.com, ZZZ@abc.com>,<24-11-2021>
+# Status <In-Production>
+
+Feature: Countdown Timer
+  This feature has a countdown functionality
+  The countdown function should use the period specified on the home page as the start time and count down every second
+
+  Background:
+    Given the user input file is loaded
+    When user input file is not empty
+
+  Scenario: Verify the web page and enter the user inputs
+    Given open the browser and enter the url
+    When page load is completed
+    Then enter the 25 seconds time in the text field
+    And validate the valid timer value
+    And click on the start button
+
+  Scenario: Verify the timer countdown
+    When countdown is happening every second, verify it
+    Then validate the remaining time decreases in one-second increments
+    And close the browser
+```
+### Step6 - Create Step Definitions
+Create Step Definitions with pending steps
+```ruby
+
+Given(/^the user input file is loaded$/) do
+  @timer = Timer.new
+  @timer.load_data
+end
+
+When(/^user input file is not empty$/) do
+  @timer.validate_yml
+end
+
+Given(/^open the browser and enter the url$/) do
+  @timer.open_browser
+end
+
+When(/^page load is completed$/) do
+  @timer.validate_page_load
+end
+
+Then(/^enter the (.*) time in the text field$/) do |countdown|
+  @timer.set_countdown(countdown)
+end
+```
+### Step7 - Create Page Object
+```ruby
+require 'yaml'
+require 'json'
+
+class Timer
+  attr_accessor :logger, :browser
+
+  def initialize
+    @logger = Logger.new(STDOUT)
+    @path = File.join(File.expand_path("." , Dir.pwd), "features" ,"config", "user_data.yml")
+  end
+
+  def load_data
+    @data = YAML.load_file(@path)
+    logger.info @data
+  end
+
+  def validate_yml
+    Dir.glob(@path) { |file|
+      begin
+        YAML.parse(File.open(file))
+        logger.info "USER INPUT file => \e[32mvalid\e[0m"
+      rescue => exception
+        logger.info "USER INPUT file => \e[31minvalid\e[0m"
+        fail
+      end
+    }
+  end
+
+  def open_browser
+    @browser = Watir::Browser.new
+    browser.goto(@data["site"]["url"])
+    browser.driver.manage.window.maximize
+  end
+end
+```
+### Step9 - Create cucumber.yml file
+Create cucumber.yml file inside project directory as shown below
+
+> default: --format html --out=timer_report.html
+
+### Step10 - Run the feature file
+
+> $ cucumber features/timer_feature.rb
+
+After execution, **timer_report.html** will be available in the root folder of the project
