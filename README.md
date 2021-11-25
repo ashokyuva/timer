@@ -14,6 +14,9 @@ http://watir.com/guides/form-example/
 Version control tool - Gitub 
 https://github.com/
 
+IDE - Rubymine
+https://www.jetbrains.com/ruby/
+
 # Ruby Installation Guide
 
 1. Go to [Ruby Installer](http://rubyinstaller.org/ "Ruby Installer") in your web browser
@@ -100,3 +103,46 @@ If it says something like the following, it worked:
 
 > Hi username! You've successfully authenticated, but Github does
 not provide shell access.
+
+# Rubymine IDE Installation Guide
+
+Download the Rubymine IDE from the below link,
+https://www.jetbrains.com/ruby/download
+
+And complete the installation. 
+
+# Steps to create our Project
+### Step1- Create Ruby Project in rubymine
+> File->New Project (Project name - Timer)
+
+### Step2 - Create Gem file
+- Select project directory, right click and click New->File
+- Create Gem file with the following Gem details as shown below.
+
+```ruby
+source 'http://rubygems.org'
+
+gem 'cucumber', '2.3.3'
+gem 'ffi', '1.11.3'
+gem 'watir', '6.10.3'
+gem 'selenium-webdriver'
+gem 'yaml'
+gem 'logger'
+```
+### Step3 - Directory Structure
+- Create sub folders as shown below
+
+```html
+features
+-> timer_feature
+	-> timer.feature
+-> config
+	-> user_data.yml
+-> lib
+	-> timer.rb
+-> step_definitions
+	-> timer_steps.rb
+-> Support
+	-> env.rb
+Gemfile
+```
