@@ -270,3 +270,49 @@ Create cucumber.yml file inside project directory as shown below
 > $ cucumber features/timer_feature.rb
 
 After execution, **timer_report.html** will be available in the root folder of the project
+
+# Push your app to GitHub using the command line
+On your GitHub profile click "new repo" give it a name (example: timer), brief description, choose the "public/private”repo option, and click "create repository"
+
+In the command line–make sure you cd into your railgirls folder–and type:
+
+> git init
+
+This initializes a git repository in your project
+
+Then type:
+
+> git status
+
+This will list out all the files in your working directory.
+
+Then type:
+
+> git add .
+
+This adds in all of your files & changes so far to a staging area.
+
+Then type:
+
+> git commit -m "first commit"
+
+This commits all of your files, adding the message “first commit”
+
+Next type:
+
+> git remote add origin https://github.com/ashokyuva/timer
+
+Your GitHub Repository page will list the repository URL, so feel free to copy and paste from there, rather than typing it in manually. You can copy and paste the link from your GitHub repository page by clicking the clipboard icon next to the URL.
+
+This creates a remote, or connection, named "origin" pointing at the GitHub repository you just created.
+
+Then type:
+
+> git push origin master
+
+This sends your commits in your **"master"** branch to GitHub
+
+And finally, our code changes will be availble here https://github.com/ashokyuva/timer/tree/master
+
+Happy Coding!
+  
