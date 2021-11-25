@@ -4,7 +4,8 @@ require 'json'
 class Timer
   attr_accessor :logger, :browser
 
-  def initialize
+  def initialize(browser)
+    @browser = browser
     @logger = Logger.new(STDOUT)
     @path = File.join(File.expand_path("." , Dir.pwd), "features" ,"config", "user_data.yml")
   end
@@ -27,9 +28,7 @@ class Timer
   end
 
   def open_browser
-    @browser = Watir::Browser.new
-    browser.goto(@data["site"]["url"])
-    browser.driver.manage.window.maximize
+    browser
   end
 
   def validate_page_load
@@ -37,7 +36,7 @@ class Timer
       browser.div(:class=>"EggTimer-start-content").exists?
       browser.text_field(:id=>"EggTimer-start-time-input-text").flash.exists?
       logger.info "Home Page has been loaded successfully"
-      browser.screenshot.save("HomePage.png")
+      # browser.screenshot.save("HomePage.png")
     rescue => exception
       raise exception
     end
@@ -58,7 +57,7 @@ class Timer
 
   def click_start
     browser.button(:class=>"validTime").when_present.flash.click!
-    @logger.info "Start button clicked"
+    logger.info "Start button clicked"
   end
 
 end
