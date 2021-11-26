@@ -1,6 +1,7 @@
 # BDD Automation with RUBY and CUCUMBER
+###### Created By Ashokkumar Yuvarajan
 
-Automation timer application - Requirements
+# Automation timer application - Requirements
 
 Automation Scripting Language - Ruby 
 https://www.ruby-lang.org/en/
