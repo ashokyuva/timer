@@ -21,27 +21,15 @@ Then(/^enter the (.*) time in the text field$/) do |countdown|
 end
 
 And(/^validate the valid timer value$/) do
-  timer.validate_countdown
+  timer.validate_countdown_value
 end
 
 And(/^click on the start button$/) do
   timer.click_start
-  @start_time = Time.now
 end
 
 When(/^countdown is happening every second, verify it$/) do
-  begin
-    @result = {}
-    loop do
-      time_now = Time.now.strftime('%H:%M:%S')
-      value_now = driver.p(:class=>"ClassicTimer-time").text
-      @result[time_now] = value_now
-      sleep 0.9
-      logger.info "Time now #{time_now} and Value now #{value_now}"
-    end
-  rescue Exception => e
-    p e
-  end
+  timer.validate_timer
 end
 
 Then(/^validate the remaining time decreases in one\-second increments$/) do
@@ -49,6 +37,6 @@ Then(/^validate the remaining time decreases in one\-second increments$/) do
 end
 
 And(/^close the browser$/) do
-
+  close_driver
 end
 

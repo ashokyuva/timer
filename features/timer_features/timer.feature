@@ -25,11 +25,6 @@ Feature: Countdown Timer
     Then enter the 25 seconds time in the text field
     And validate the valid timer value
     And click on the start button
-#    Examples:
-#    |countdown|
-#    |25 sec|
-##    |25 m|
-##    |25 seconds|
 
   Scenario: Verify the timer countdown
     When countdown is happening every second, verify it
