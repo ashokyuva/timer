@@ -68,6 +68,19 @@ From the command line, install the gem, which Ruby’s way of packaging code:
 
 > gem install watir
 
+We recommend using the webdrivers gem to automatically ensure that the latest driver is downloaded, and placed in a location where Selenium can access it.
+
+If you want to set things manually, you can download the drivers for the browser of your choice:
+
+>
+-  Google Chrome: [chromedriver](https://sites.google.com/a/chromium.org/chromedriver/downloads "chromedriver")
+- Mozilla Firefox: [geckodriver](https://github.com/mozilla/geckodriver/releases "geckodriver")
+- Microsoft Edge: [Microsoft WebDriver](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/ "Microsoft WebDriver")
+- Microsoft Internet Explorer: [IEDriver](http://docs.seleniumhq.org/download "IEDriver")
+- Apple Safari: safaridriver (no download needed, it’s pre-installed if you have Safari 10)
+
+For all browsers except for Safari, you then need to add the path to your driver to the PATH Environment Variable. This can be especially tricky in Windows.
+
 # Gitub Installation Guide
 GitHub is a provider of Internet hosting for software development and version control using Git. It offers the distributed version control and source code management functionality of Git, plus its own features.
 
